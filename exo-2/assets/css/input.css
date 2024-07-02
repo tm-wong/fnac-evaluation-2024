@@ -1,0 +1,67 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'AmaranthRegular';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/amaranth/woff/Amaranth-Regular.woff2') format('woff2'),
+      url('../fonts/amaranth/woff/Amaranth-Regular.woff') format('woff'),
+      url('../fonts/amaranth/true-type/Amaranth-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'AmaranthBold';
+    src: url('../fonts/amaranth/woff/Amaranth-Bold.woff2') format('woff2'),
+      url('../fonts/amaranth/woff/Amaranth-Bold.woff') format('woff'),
+      url('../fonts/amaranth/true-type/Amaranth-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: 700;
+    font-display: swap;
+  }
+}
+
+.amaranth-regular {
+  font-family: AmaranthRegular;
+}
+
+.amaranth-bold {
+  font-family: AmaranthBold;
+}
+
+.header-bg {
+  background-image: url('../images/header-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dark-nav {
+  background-color: #24272c;
+}
+
+.menu-selected {
+  background-color: #302c4c;
+}
+
+.main-background-color {
+  background-color: #ecf1f7;
+}
+
+.footer-background-color {
+  background-color: #24272c;
+}
+
+.footer-sub-listing {
+  color: #969ba1;
+}
+
+.socials-border-color {
+  border-color: #606368;
+}
+
+.socials-fill-color {
+  fill: #c2c3c5;
+}
