@@ -6,7 +6,10 @@ const multiplierConfig = {
 };
 
 const getDiscount = years => {
-  return (years > 5) ? 5 / 100 : years / 100;
+  const rate = years / 100;
+  if (rate > (5 / 100))
+    return (5 / 100);
+  return rate;
 };
 
 const getMultiplier = type => {
@@ -15,19 +18,19 @@ const getMultiplier = type => {
   return multiplierConfig[type];
 };
 
-const getRate = (amount, multiplier, discount) => {
-  return (amount * multiplier) - (discount * multiplier * amount);
+const getDiscounted = (amount, multiplier, discount) => {
+  return amount * multiplier * (1 - discount);
 };
 
 // Simplify / Refactorize this function
 const calculateDiscount = (amount, type, years) => {
   try {
-    let result = 0
     const discount = getDiscount(years);
     const multiplier = getMultiplier(type);
-    return getRate(amount, multiplier, discount);
+    return getDiscounted(amount, multiplier, discount);
   } catch(err) {
-    console.error(err);
+    console.warn('Warning: returning 0 as discounted product price !');
+    return 0;
   }
 }
 

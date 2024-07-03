@@ -1,4 +1,4 @@
-x# Instructions
+# Instructions
 
 Réalisez la maquette en HTML (responsive serait un plus) en respectant la sémantique, les normes W3C, les règles d'accessibilité et les critères de performance web.
 
