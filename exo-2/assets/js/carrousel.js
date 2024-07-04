@@ -106,6 +106,40 @@ const moveOne = (direction, slider) => {
   slider.style.left = `${ where }px`;
 };
 
+//
+
+const getParentThumb = element => {
+  if (Array.from(element.classList).includes('thumbnail') === false)
+    return getParentThumb(element.parentNode);
+  return element;
+};
+
+const growThumb = element => {
+  const thumb = getParentThumb(element);
+  thumb.style.transform = 'scale(1.08) translate(-0.5%, -0.5%)';
+};
+
+const shrinkThumb = element => {
+  const thumb = getParentThumb(element);
+  thumb.style.transform = 'scale(1)';
+};
+
+const thumbnailInit = () => {
+  const sliders = getSliders();
+  Array.from(sliders).forEach(sliderItem => {
+    const thumbnails = getThumbnails(sliderItem);
+    Array.from(thumbnails).forEach(thumbnail => {
+      thumbnail.addEventListener('mouseover', e => {
+        growThumb(e.target);
+      }, false);
+      thumbnail.addEventListener('mouseout', e => {
+        shrinkThumb(e.target);
+      }, false);
+    });
+  });
+};
+
+
 const init = () => {
 
   setSliderWidth();
@@ -127,6 +161,7 @@ const init = () => {
     }, false);
   });
 
+  thumbnailInit();
 };
 
 const docReady = func => {
