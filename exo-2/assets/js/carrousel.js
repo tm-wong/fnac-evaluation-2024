@@ -116,7 +116,7 @@ const getParentThumb = element => {
 
 const growThumb = element => {
   const thumb = getParentThumb(element);
-  thumb.style.transform = 'scale(1.08) translate(-0.5%, -0.5%)';
+  thumb.style.transform = 'scale(1.08) translate(-0.5%, 0.3%)';
 };
 
 const shrinkThumb = element => {
@@ -135,6 +135,48 @@ const thumbnailInit = () => {
       thumbnail.addEventListener('mouseout', e => {
         shrinkThumb(e.target);
       }, false);
+    });
+  });
+};
+
+const getScrollWhere = val => {
+  return (600 * (val - 1)) + 75;
+};
+
+const smoothScroll = val => {
+
+  if (!val)
+    return;
+
+  const main = document.querySelector('#wrapper');
+
+  console.debug('main', main)
+  console.debug('main.scrollTop - 1', main.scrollTop)
+
+  main.addEventListener('scroll', e => console.debug(`scrollTop : ${ main.scrollTop }`));
+
+  const where = getScrollWhere(val);
+  console.debug('where', where)
+
+  main.scroll({
+    top: where,
+    left: 0,
+    behavior: 'smooth',
+  });
+
+  console.debug('main.scrollTop - 2', main.scrollTop)
+  console.debug('done');
+};
+
+const initScroll = () => {
+  const menuLinks = document.querySelectorAll('nav a.menu-links');
+  Array.from(menuLinks).forEach(link => {
+    link.addEventListener('click', e => {
+      const multiplier = parseInt(
+        e.target.id.match(/\d*/g)
+          .filter(item => item.length)
+      , 10);
+      return void smoothScroll(multiplier);
     });
   });
 };
@@ -162,6 +204,7 @@ const init = () => {
   });
 
   thumbnailInit();
+  initScroll();
 };
 
 const docReady = func => {
