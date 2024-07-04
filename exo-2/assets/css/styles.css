@@ -217,7 +217,62 @@ main {
 
 footer {
   width: 100vw;
-  height: 200px;
+  height: 275px;
   position: relative;
   bottom: 0;
+  background-color: #24272c;
+  flex-shrink:1;
+  padding: 3.5vw 5.7vw 0 5.7vw;
+}
+
+footer > div.footer-content {
+  width: 1200px;
+}
+
+footer > ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+footer > ul > li {
+  width: 24vw;
+  padding: 0;
+  margin: 0;
+}
+
+footer > ul > li > a {
+  display: block; font-size: 1.2vw; width: 31vw; font-family: AmaranthBold; color: #fff; text-decoration: none;
+}
+
+footer > ul > li > ul {
+  padding-top: 1vw; line-height: 1.5vw; padding: 0; margin: 0; margin-top: 0.7vw;
+}
+
+footer > ul > li > ul > li > a {
+  font-family: AmaranthRegular; font-size: 1vw; color: #989fa5; text-decoration: none; padding: 0; margin: 0;
+}
+
+footer > ul > li > ul > li > a.last-item {
+  display: block;
+  width: 38vw;
+}
+
+footer > div {
+  display: flex;; text-align: center; flex-direction: row; width: 1200px; margin: 2.5vw auto 0 auto;
+}
+
+footer > div > a {
+  margin: 0.6vw; display: block; height: 2.8vw; width: 2.8vw; border: 1px solid #616469; border-radius: 1.4vw;
+}
+
+footer > div > a > img {
+  margin: auto; margin-top: calc((2.8vw/2)-(1.6vw/2)); stroke: none; fill: #b9bdc0; height: 1.4vw; padding-top: 0.8vw;
+}
+
+footer ul, footer li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
