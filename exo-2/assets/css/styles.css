@@ -216,8 +216,9 @@ main {
 }
 
 footer {
+  margin-top: 150px;
   width: 100vw;
-  height: 275px;
+  height: 350px;
   position: relative;
   bottom: 0;
   background-color: #24272c;
@@ -229,50 +230,63 @@ footer > div.footer-content {
   width: 1200px;
 }
 
-footer > ul {
+footer > div.footer-content > ul {
   display: flex;
   flex-direction: row;
   padding: 0;
   margin: 0;
+  margin: auto;
 }
 
-footer > ul > li {
+footer > div.footer-content > ul > li {
   width: 24vw;
   padding: 0;
   margin: 0;
 }
 
-footer > ul > li > a {
+footer > div.footer-content > ul > li > a {
   display: block; font-size: 1.2vw; width: 31vw; font-family: AmaranthBold; color: #fff; text-decoration: none;
 }
 
-footer > ul > li > ul {
+footer > div.footer-content > ul > li > ul {
   padding-top: 1vw; line-height: 1.5vw; padding: 0; margin: 0; margin-top: 0.7vw;
 }
 
-footer > ul > li > ul > li > a {
+footer > div.footer-content > ul > li > ul > li > a {
   font-family: AmaranthRegular; font-size: 1vw; color: #989fa5; text-decoration: none; padding: 0; margin: 0;
 }
 
-footer > ul > li > ul > li > a.last-item {
+footer > div.footer-content > ul > li > ul > li > a.last-item {
   display: block;
   width: 38vw;
 }
 
-footer > div {
-  display: flex;; text-align: center; flex-direction: row; width: 1200px; margin: 2.5vw auto 0 auto;
+footer > div.footer-content > div.socials-column {
+  width: 220px; margin: 10px auto; display: flex;; flex-direction: row; padding-top: 25px;
 }
 
-footer > div > a {
-  margin: 0.6vw; display: block; height: 2.8vw; width: 2.8vw; border: 1px solid #616469; border-radius: 1.4vw;
+footer > div.footer-content > div.socials-column > div.socials {
+  display: flex;; flex-direction: row; flex-shrink: 2;
 }
 
-footer > div > a > img {
-  margin: auto; margin-top: calc((2.8vw/2)-(1.6vw/2)); stroke: none; fill: #b9bdc0; height: 1.4vw; padding-top: 0.8vw;
+footer > div.footer-content > div.socials-column > div.socials > a {
+  margin: 7px; display: block; height: 40px; width: 40px; border: 1px solid #616469; border-radius: 20px;
 }
 
-footer ul, footer li {
+footer > div.footer-content > div.socials-column > div.socials > a > img {
+  margin: auto; stroke: none; fill: #b9bdc0; height: 20px; padding-top: 10px; padding-left: 10px;
+}
+
+footer > div.footer-content ul, footer li {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.copyright {
+  padding-top: 1.2vw; padding-bottom: 3vw; text-align: center;
+}
+
+.copyright > span {
+  font-size: 0.8vw; color: #565b5f;
 }
