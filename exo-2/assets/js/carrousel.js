@@ -21,8 +21,19 @@ const getSliders = () => {
   return document.querySelectorAll('.slider');
 };
 
-const sanitize = strStyle => {
-  return parseInt(strStyle.replace('px', ''), 10);
+const toInt = item => {
+  return parseInt(item.replace('px', ''), 10);
+}
+
+const sanitize = item => {
+  if (typeof item === 'string')
+    return toInt(item);
+  for (i in item) {
+    if (typeof item[i] !== 'string')
+      continue;
+    item[i] = toInt(item[i]);
+  }
+  return item;
 };
 
 const setSliderWidth = () => {
@@ -65,16 +76,16 @@ const getWhere = options => {
     width,
     left,
     multiplier
-  } = options;
+  } = sanitize(options);
 
-  if (widthStyle === false || leftStyle === false) {
+  if (widthStyle === false || leftStyle === false)
     return;
-  } else if (
+  else if (
     multiplier === -1 &&
-    Math.abs(left) + sanitize(holderWidth) + width > sanitize(sliderWidth) && multiplier === -1 &&
-    Math.abs(Math.abs(left) + sanitize(holderWidth) - sanitize(sliderWidth)) < width
+    Math.abs(left) + holderWidth + width > sliderWidth && multiplier === -1 &&
+    Math.abs(Math.abs(left) + holderWidth - sliderWidth) < width
   ) {
-    remains = Math.abs(left) + sanitize(holderWidth) - sanitize(sliderWidth)
+    remains = Math.abs(left) + holderWidth - sliderWidth;
     where = left + remains;
   } else if (
     multiplier === 1 &&
@@ -124,7 +135,7 @@ const shrinkThumb = element => {
   thumb.style.transform = 'scale(1)';
 };
 
-const thumbnailInit = () => {
+const initThumbnail = () => {
   const sliders = getSliders();
   Array.from(sliders).forEach(sliderItem => {
     const thumbnails = getThumbnails(sliderItem);
@@ -143,41 +154,39 @@ const getScrollWhere = val => {
   return (600 * (val - 1)) + 75;
 };
 
-const smoothScroll = val => {
-
-  if (!val)
-    return;
-
-  const main = document.querySelector('#wrapper');
-
-  console.debug('main', main)
-  console.debug('main.scrollTop - 1', main.scrollTop)
-
-  main.addEventListener('scroll', e => console.debug(`scrollTop : ${ main.scrollTop }`));
-
-  const where = getScrollWhere(val);
-  console.debug('where', where)
-
-  main.scroll({
-    top: where,
-    left: 0,
-    behavior: 'smooth',
-  });
-
-  console.debug('main.scrollTop - 2', main.scrollTop)
-  console.debug('done');
-};
-
 const initScroll = () => {
-  const menuLinks = document.querySelectorAll('nav a.menu-links');
-  Array.from(menuLinks).forEach(link => {
-    link.addEventListener('click', e => {
-      const multiplier = parseInt(
-        e.target.id.match(/\d*/g)
-          .filter(item => item.length)
-      , 10);
-      return void smoothScroll(multiplier);
-    });
+  const main = document.querySelector('#wrapper');
+  const anchors = document.querySelectorAll('a.menu-link[href^="#"]');
+
+  anchors.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+
+      const href = e.target.getAttribute('href');
+      const target = document.querySelector(href);
+
+      if (!target)
+        return;
+
+      const options = {
+        top: target.offsetTop,
+        behavior: 'smooth'
+      };
+
+      main.scrollTo(options);
+    })
+  });
+}
+
+const initMenu = () => {
+  const menuLinks = document.querySelectorAll('.menu-link');
+  Array.from(menuLinks).forEach(item => {
+    item.addEventListener('click', e => {
+      Array.from(menuLinks).forEach(
+        menuItem => menuItem.classList.remove('selected')
+      );
+      item.classList.add('selected');
+    })
   });
 };
 
@@ -203,8 +212,9 @@ const init = () => {
     }, false);
   });
 
-  thumbnailInit();
+  initThumbnail();
   initScroll();
+  initMenu();
 };
 
 const docReady = func => {
